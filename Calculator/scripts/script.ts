@@ -1,4 +1,9 @@
-const values: Map<string, number> = new Map()
+/* Values Interface for calculator values blueprint */
+interface CalculatorValues {
+    value_one: number;
+    operator?: string;
+    value_two: number;
+}
 
 /* Event Listener Interface */
 interface IButtonEventListener {
@@ -55,39 +60,49 @@ class Calculator {
 }
 
 /* Instantiates a Button object which contains a field holding a list of
-    button elements.
+    button elements. Also, other variables for different purposes are
+    present here.
     */
 const number_buttons = new Button(document.querySelectorAll(".number_buttons"));
 const arithmetic_buttons = new Button(document.querySelectorAll(".arithmetic_buttons"));
 const equals_button = new Button(document.querySelectorAll(".button_equals"));
 const clear_button = new Button(document.querySelectorAll(".button_clear"));
 const output_content: HTMLInputElement = document.querySelector("#output_screen")!;
+const values: CalculatorValues = {
+    value_one: 0,
+    operator: undefined,
+    value_two: 0
+}
 
+/* Loads all necessary event handlers for all elements within the website
+    in order to function
+    */
 Utilities.loadDOMContent(() => {
-
+    // Event Handler for all Number Buttons
     Utilities.addClickEventListener(number_buttons.buttons, (element) => {
         number_buttons.onButtonClicked(element.target, (button) => {
             output_content.value += button.innerText;
         });
     });
-
+    // Event Handler for all Arithmetic Operator Buttons
     Utilities.addClickEventListener(arithmetic_buttons.buttons, (element) => {
         number_buttons.onButtonClicked(element.target, () => {
-            values.set("first_value", Number(output_content.value));
+            values.value_one = Number(output_content.value)
             Calculator.resetOutputContent(output_content);
-            console.log(values.get("first_value"));
         });
     });
-
+    // Event Handler for the Equal Sign (=) Button
     Utilities.addClickEventListener(equals_button.buttons, (element) => {
         equals_button.onButtonClicked(element, () => {
-            values.set("last_value", Number(output_content.value));
-            console.log(values.get("last_value"));
+            console.log(values.value_one);
         });
     });
-
+    // Event Handler for the Clear (CLR) Button
     Utilities.addClickEventListener(clear_button.buttons, (element) => {
         clear_button.onButtonClicked(element, () => {
+            values.value_two = Number(output_content.value)
+            console.log(values.value_one)
+            console.log(values.value_two)
             Calculator.resetOutputContent(output_content)
         });
     });
