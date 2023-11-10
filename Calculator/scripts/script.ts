@@ -30,7 +30,7 @@ class Button implements IButtonEventListener {
 /* Static class containing custom methods with using existing DOM
     functions with type annotations
     */
-class Utilities {
+class Utilities{
 
     private constructor() {} // Cannot instantiate this class, can only be used for static calls
 
@@ -57,6 +57,16 @@ class Calculator {
     static resetOutputContent(element: HTMLInputElement) {
         element.value = "";
     }
+
+    static getCalculationResult(
+        first_value: number, operator: string, last_value: number
+    ): number {
+        switch (operator) {
+            case "+": return first_value + last_value
+            case "-": return first_value - last_value
+        }
+        return 0
+    }
 }
 
 /* Instantiates a Button object which contains a field holding a list of
@@ -78,6 +88,7 @@ const values: CalculatorValues = {
     in order to function
     */
 Utilities.loadDOMContent(() => {
+
     // Event Handler for all Number Buttons
     Utilities.addClickEventListener(number_buttons.buttons, (element) => {
         number_buttons.onButtonClicked(element.target, (button) => {
@@ -91,19 +102,17 @@ Utilities.loadDOMContent(() => {
             Calculator.resetOutputContent(output_content);
         });
     });
+
     // Event Handler for the Equal Sign (=) Button
     Utilities.addClickEventListener(equals_button.buttons, (element) => {
-        equals_button.onButtonClicked(element, () => {
-            console.log(values.value_one);
-        });
+        Calculator.resetOutputContent(output_content);
     });
+
     // Event Handler for the Clear (CLR) Button
     Utilities.addClickEventListener(clear_button.buttons, (element) => {
         clear_button.onButtonClicked(element, () => {
-            values.value_two = Number(output_content.value)
-            console.log(values.value_one)
-            console.log(values.value_two)
-            Calculator.resetOutputContent(output_content)
+            Calculator.resetOutputContent(output_content);
         });
     });
+
 });
