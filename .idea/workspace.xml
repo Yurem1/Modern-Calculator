@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9126847a-7c45-4f05-bac8-3950f2b3f14f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Calculator/dist/output.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Calculator/scripts/script.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Calculator/src/input.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modern Calculator.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+    <list default="true" id="9126847a-7c45-4f05-bac8-3950f2b3f14f" name="Changes" comment="compiled JS file">
+      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calculator/scripts/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/Calculator/scripts/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calculator/scripts/script.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Calculator/scripts/script.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,8 +86,52 @@
       <workItem from="1699311000863" duration="1545000" />
       <workItem from="1699386499975" duration="1861000" />
       <workItem from="1699392065790" duration="5529000" />
-      <workItem from="1699478049972" duration="5758000" />
+      <workItem from="1699478049972" duration="7649000" />
+      <workItem from="1699560436462" duration="2410000" />
+      <workItem from="1699582137639" duration="2657000" />
+      <workItem from="1699644056914" duration="2244000" />
     </task>
+    <task id="LOCAL-00001" summary="Hello World!">
+      <option name="closed" value="true" />
+      <created>1699558529058</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1699558529058</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added a few interfaces and adjustments to functions">
+      <option name="closed" value="true" />
+      <created>1699560419480</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1699560419480</updated>
+    </task>
+    <task id="LOCAL-00003" summary="adding files">
+      <option name="closed" value="true" />
+      <created>1699582936344</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1699582936344</updated>
+    </task>
+    <task id="LOCAL-00004" summary="compiled JS file">
+      <option name="closed" value="true" />
+      <created>1699583207022</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1699583207022</updated>
+    </task>
+    <task id="LOCAL-00005" summary="compiled JS file">
+      <option name="closed" value="true" />
+      <created>1699583248593</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1699583248593</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -105,5 +141,12 @@
         <option value="$PROJECT_DIR$/Calculator/scripts/script.js" />
       </list>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Hello World!" />
+    <MESSAGE value="Added a few interfaces and adjustments to functions" />
+    <MESSAGE value="adding files" />
+    <MESSAGE value="compiled JS file" />
+    <option name="LAST_COMMIT_MESSAGE" value="compiled JS file" />
   </component>
 </project>

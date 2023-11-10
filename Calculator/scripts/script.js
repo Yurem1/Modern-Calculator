@@ -6,10 +6,6 @@ class Button {
     constructor(elements) {
         this.buttons = elements;
     }
-    onButtonClicked(element, callback) {
-        console.log(`${element.id} was pressed`);
-        callback(element);
-    }
 }
 /* Static class containing custom methods with using existing DOM
     functions with type annotations
@@ -18,8 +14,9 @@ class Utilities {
     constructor() { } // Cannot instantiate this class, can only be used for static calls
     static addClickEventListener(element_list, callback) {
         element_list.forEach(element => {
-            element.addEventListener("click", button => {
-                callback(button);
+            element.addEventListener("click", () => {
+                console.log(`Element ${element.id} was clicked!`);
+                callback(element);
             });
         });
     }
@@ -35,10 +32,12 @@ class Calculator {
     static resetOutputContent(element) {
         element.value = "";
     }
-    static getCalculationResult(first_value, operator, last_value) {
+    static getCalculationResult(val_one, operator, val_two) {
         switch (operator) {
-            case "+": return first_value + last_value;
-            case "-": return first_value - last_value;
+            case "+": return val_one + val_two;
+            case "-": return val_one - val_two;
+            case "*": return val_one * val_two;
+            case "/": return val_one / val_two;
         }
         return 0;
     }
@@ -54,7 +53,7 @@ const clear_button = new Button(document.querySelectorAll(".button_clear"));
 const output_content = document.querySelector("#output_screen");
 const values = {
     value_one: 0,
-    operator: undefined,
+    operator: "",
     value_two: 0
 };
 /* Loads all necessary event handlers for all elements within the website
@@ -63,25 +62,21 @@ const values = {
 Utilities.loadDOMContent(() => {
     // Event Handler for all Number Buttons
     Utilities.addClickEventListener(number_buttons.buttons, (element) => {
-        number_buttons.onButtonClicked(element.target, (button) => {
-            output_content.value += button.innerText;
-        });
+        output_content.value += element.innerText;
     });
     // Event Handler for all Arithmetic Operator Buttons
     Utilities.addClickEventListener(arithmetic_buttons.buttons, (element) => {
-        number_buttons.onButtonClicked(element.target, () => {
-            values.value_one = Number(output_content.value);
-            Calculator.resetOutputContent(output_content);
-        });
-    });
-    // Event Handler for the Equal Sign (=) Button
-    Utilities.addClickEventListener(equals_button.buttons, (element) => {
+        values.value_one = Number(output_content.value);
+        values.operator = String(element.innerText);
         Calculator.resetOutputContent(output_content);
     });
     // Event Handler for the Clear (CLR) Button
-    Utilities.addClickEventListener(clear_button.buttons, (element) => {
-        clear_button.onButtonClicked(element, () => {
-            Calculator.resetOutputContent(output_content);
-        });
+    Utilities.addClickEventListener(clear_button.buttons, () => {
+        Calculator.resetOutputContent(output_content);
+    });
+    // Event Handler for the Equal Sign (=) Button
+    Utilities.addClickEventListener(equals_button.buttons, (element) => {
+        values.value_two = Number(output_content.value);
+        output_content.value = String(Calculator.getCalculationResult(values.value_one, values.operator, values.value_two));
     });
 });
