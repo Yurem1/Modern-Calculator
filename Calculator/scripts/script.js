@@ -1,4 +1,48 @@
 "use strict";
+/* Static class for functions regarding the Calculator */
+class Calculator {
+    constructor() { }
+    static clearCalculatorHistory() {
+        this.operand1 = 0;
+        this.operator = "";
+        this.operand2 = 0;
+        this.result = 0;
+        this.canType = true;
+        this.isResult = false;
+    }
+    static clearLastCalculation() {
+        this.operand1 = this.operand2;
+    }
+    static resetOutputContent(element) {
+        element.value = "";
+    }
+    static getCalculationResult(callback) {
+        if (!this.isResult) {
+            switch (this.operator) {
+                case "+":
+                    this.result = this.operand1 + this.operand2;
+                    break;
+                case "-":
+                    this.result = this.operand1 - this.operand2;
+                    break;
+                case "*":
+                    this.result = this.operand1 * this.operand2;
+                    break;
+                case "/":
+                    this.result = this.operand1 / this.operand2;
+                    break;
+                default: this.result = Number(output_content.value);
+            }
+            callback(this.result);
+        }
+    }
+}
+Calculator.operand1 = 0;
+Calculator.operator = "";
+Calculator.operand2 = 0;
+Calculator.result = 0;
+Calculator.canType = true;
+Calculator.isResult = false;
 /* Instantiates a button object, which in turn, stores a list of button
     and provides an event handler for the list of elements
     */
@@ -26,22 +70,6 @@ class Utilities {
         });
     }
 }
-/* Static class for functions regarding the Calculator */
-class Calculator {
-    constructor() { } // Cannot instantiate this class, can only be used for static calls
-    static resetOutputContent(element) {
-        element.value = "";
-    }
-    static getCalculationResult(val_one, operator, val_two) {
-        switch (operator) {
-            case "+": return val_one + val_two;
-            case "-": return val_one - val_two;
-            case "*": return val_one * val_two;
-            case "/": return val_one / val_two;
-        }
-        return 0;
-    }
-}
 /* Instantiates a Button object which contains a field holding a list of
     button elements. Also, other variables for different purposes are
     present here.
@@ -51,32 +79,44 @@ const arithmetic_buttons = new Button(document.querySelectorAll(".arithmetic_but
 const equals_button = new Button(document.querySelectorAll(".button_equals"));
 const clear_button = new Button(document.querySelectorAll(".button_clear"));
 const output_content = document.querySelector("#output_screen");
-const values = {
-    value_one: 0,
-    operator: "",
-    value_two: 0
-};
 /* Loads all necessary event handlers for all elements within the website
     in order to function
     */
 Utilities.loadDOMContent(() => {
     // Event Handler for all Number Buttons
     Utilities.addClickEventListener(number_buttons.buttons, (element) => {
-        output_content.value += element.innerText;
+        if (Calculator.canType) {
+            output_content.value += element.innerHTML;
+        }
     });
     // Event Handler for all Arithmetic Operator Buttons
     Utilities.addClickEventListener(arithmetic_buttons.buttons, (element) => {
-        values.value_one = Number(output_content.value);
-        values.operator = String(element.innerText);
-        Calculator.resetOutputContent(output_content);
+        if (Calculator.canType) {
+            Calculator.operand1 = Number(output_content.value);
+            Calculator.operator = element.innerHTML;
+            Calculator.resetOutputContent(output_content);
+        }
+        else if (!Calculator.canType && Calculator.isResult) {
+            Calculator.operator = element.innerHTML;
+            Calculator.operand2 = Number(output_content.value);
+            Calculator.canType = true;
+            Calculator.isResult = false;
+            Calculator.clearLastCalculation();
+            Calculator.resetOutputContent(output_content);
+        }
     });
     // Event Handler for the Clear (CLR) Button
     Utilities.addClickEventListener(clear_button.buttons, () => {
         Calculator.resetOutputContent(output_content);
+        Calculator.clearCalculatorHistory();
     });
     // Event Handler for the Equal Sign (=) Button
-    Utilities.addClickEventListener(equals_button.buttons, (element) => {
-        values.value_two = Number(output_content.value);
-        output_content.value = String(Calculator.getCalculationResult(values.value_one, values.operator, values.value_two));
+    Utilities.addClickEventListener(equals_button.buttons, () => {
+        Calculator.operand2 = Number(output_content.value);
+        Calculator.getCalculationResult((num) => {
+            Calculator.canType = false;
+            Calculator.isResult = true;
+            output_content.value = String(num);
+        });
     });
 });
